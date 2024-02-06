@@ -8,6 +8,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/inter";
 import { Loading } from "@/components/loading";
+import { Header } from "@/components/header";
 
 export default function Layout() {
   const [fontsLoaded] = useFonts({
@@ -23,6 +24,7 @@ export default function Layout() {
 
   return (
     <SafeAreaView className="bg-slate-900 flex-1">
+      <Header title="Faça seu pedido" cartQuantity={3} />
       <Slot />
     </SafeAreaView>
   );
