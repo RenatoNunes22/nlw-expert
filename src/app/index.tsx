@@ -5,6 +5,7 @@ import { CATEGORIES, MENU } from "@/utils/data/products";
 import { useState, useRef } from "react";
 import { Product } from "@/components/product";
 import { Link } from "expo-router";
+
 export default function Home() {
   const [categorySelected, setCategorySelected] = useState<string>(
     CATEGORIES[0]

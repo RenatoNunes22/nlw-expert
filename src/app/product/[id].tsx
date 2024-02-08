@@ -1,20 +1,28 @@
 import { View, Image, Text } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import { PRODUCTS } from "@/utils/data/products";
 import { formatCurrency } from "@/utils/format-currency";
 import { Button } from "@/components/button";
 import { Feather } from "@expo/vector-icons";
 import { LinkButton } from "@/components/linkButton";
+import { useCartStore } from "@/stores/cart-store";
 
 export default function Product() {
   const { id } = useLocalSearchParams();
+  const cartStore = useCartStore();
+  const navigation = useNavigation();
   const product = PRODUCTS.filter((product) => product.id === id)[0];
 
+  function handleAddCart() {
+    cartStore.add(product);
+    navigation.goBack();
+  }
+
   return (
-    <View className="flex-1 mt-5 ">
+    <View className="flex-1 mt-5">
       <Image
         source={product.cover}
-        style={{ width: "90%", height: 200 }}
+        style={{ width: "90%", height: 180 }}
         className="rounded-md mx-5"
         resizeMode="cover"
       />
@@ -34,22 +42,14 @@ export default function Product() {
             {ingredient}
           </Text>
         ))}
-        <View className="flex-1 flex-row justify-between mt-5">
-          {/* <View
-            //style={{ width: "45%" }}
-            className="h-12 px-6 bg-lime-400 rounded-md items-center justify-center flex-row"
-          >
-            <LinkButton href="/" title="Voltar ao cardapio" />
-          </View> */}
-          <Button
-            className="bg-lime-400 rounded-md items-center w-full justify-center"
-            onPress={() => {}}
-          >
+        <View className="py-6 px- 0 pb-8 gap-5">
+          <Button onPress={handleAddCart}>
             <Button.Icon>
               <Feather name="plus-circle" size={20} />
             </Button.Icon>
             <Button.Text>Adicionar ao carrinho</Button.Text>
           </Button>
+          <LinkButton href="/" title="Voltar ao cardapio" />
         </View>
       </View>
     </View>
