@@ -85,15 +85,14 @@ export default function Cart() {
                 Seu carrinho está vazio
               </Text>
             )}
-            <View className="flex-1 justify-center items-center">
-              <Input
-                placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..."
-                onChangeText={setAddress}
-                blurOnSubmit={true}
-                onSubmitEditing={handleOrder}
-                returnKeyType="next"
-              />
-            </View>
+
+            <Input
+              placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..."
+              onChangeText={setAddress}
+              blurOnSubmit={true}
+              onSubmitEditing={handleOrder}
+              returnKeyType="next"
+            />
           </View>
         </ScrollView>
       </KeyboardAwareScrollView>
