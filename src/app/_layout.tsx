@@ -10,8 +10,10 @@ import {
 import { Loading } from "@/components/loading";
 import { Header } from "@/components/header";
 import { useCartStore } from "@/stores/cart-store";
+import { usePathname } from "expo-router";
 
 export default function Layout() {
+  const route = usePathname();
   const cartStore = useCartStore();
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -24,6 +26,8 @@ export default function Layout() {
     return <Loading />;
   }
 
+  console.log();
+
   const cartQuantity = cartStore.products.reduce(
     (total, product) => total + product.quantity,
     0
@@ -31,7 +35,10 @@ export default function Layout() {
 
   return (
     <SafeAreaView className="bg-slate-900 flex-1">
-      <Header title="Faça seu pedido" cartQuantityItems={cartQuantity} />
+      <Header
+        title={route === "/cart" ? "Seu carrinho" : "Faça seu pedido"}
+        cartQuantityItems={cartQuantity}
+      />
       <Slot />
     </SafeAreaView>
   );
