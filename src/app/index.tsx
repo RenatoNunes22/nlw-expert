@@ -1,7 +1,7 @@
 import { CategoryButton } from "@/components/categoryButton";
 import { Header } from "@/components/header";
 import { View, FlatList, SectionList, Text } from "react-native";
-import { CATEGORIES, MENU } from "@/utils/data/products";
+import { CATEGORIES, MENU, ProductProps } from "@/utils/data/products";
 import { useState, useRef } from "react";
 import { Product } from "@/components/product";
 import { Link } from "expo-router";
@@ -11,7 +11,7 @@ export default function Home() {
     CATEGORIES[0]
   );
 
-  const sectionListRef = useRef<SectionList>(null);
+  const sectionListRef = useRef<SectionList<ProductProps>>(null);
 
   function handleCategorySelect(selectedCategory: string) {
     setCategorySelected(selectedCategory);
@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <View className="bg-slate-900 flex-1 pt-8">
       <FlatList
-        className="max-h-10 mt-4"
+        className="max-h-10"
         data={CATEGORIES}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
@@ -47,7 +47,7 @@ export default function Home() {
       />
       <SectionList
         ref={sectionListRef}
-        className="flex-1 px-5 mt-3"
+        className="flex-1 px-5"
         sections={MENU}
         keyExtractor={(item) => item.id}
         stickySectionHeadersEnabled={false}
